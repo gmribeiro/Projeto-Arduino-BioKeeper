@@ -1,8 +1,4 @@
-# <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Nature/Leaf%20Fluttering%20in%20Wind.png" alt="Leaf" width="35" height="35" /> Bio Keeper: Sistema Inteligente de Preservação de Nutrientes via IoT
-
----
-
-## 💎 Proposta de Valor e Diferencial Comercial
+## 💵 Proposta de Valor e Diferencial Comercial
 > [!IMPORTANT]
 > Diferente de sistemas de refrigeração convencionais, que atuam apenas na redução da atividade bacteriana através do frio, o **Bio Keeper** foca na **manutenção da vitalidade celular** do vegetal.
 
