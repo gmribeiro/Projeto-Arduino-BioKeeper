@@ -76,8 +76,8 @@ O sistema conta com um módulo de inteligência de dados que registra oscilaçõ
   <p><strong>ADS - FATEC Indaiatuba (2026)</strong></p>
   <br>
   <p>
-    Arthur Lima Batista &nbsp;|&nbsp; Gabriel de Melo Ribeiro &nbsp;|&nbsp; Guilherme Bianchi Machado<br><br>
-    Guilherme Pepe Ferreira &nbsp;|&nbsp; Gustavo Gomes Andrade &nbsp;|&nbsp; Gustavo Henrique Gonçalves Barbuena
+    Arthur Battista de Lima &nbsp;|&nbsp; Gabriel de Melo Ribeiro &nbsp;|&nbsp; Guilherme Bianchi Machado<br><br>
+    Guilherme Pepe Ferreira &nbsp;|&nbsp; Gustavo Gomes Andrade &nbsp;|&nbsp; Gustavo Henrique Gonçalves Barguena
   </p>
 </div>
 
