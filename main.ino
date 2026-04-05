@@ -13,7 +13,7 @@ const long intervalLed = 100; //INTERVALO DO LED
 void setup() {
   Serial.begin(115200);
   pinMode(LED_PIN, OUTPUT);
-  Serial.println("Iniciando sensor DHT...");
+  Serial.println("--- Sistema de Conservação UV (DHT22) Ativo ---");
   dht.begin(); 
 }
 void loop() {
