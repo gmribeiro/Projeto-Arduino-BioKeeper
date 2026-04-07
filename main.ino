@@ -1,43 +1,40 @@
 #include "DHT.h"
-
-#define DHTPIN 3
+#define DHTPIN 4 //PINO DO SENSOR DE TEMPERATURA E UMIDADE
 #define DHTTYPE DHT22
-#define PINOUV 13
-#define PINOSENSOR 2
+#define LED_PIN 2 //PINO DO LED UV 
 
-DHT dht(DHTPIN, DHTTYPE);
+DHT dht (DHTPIN, DHTTYPE);
 
-int velocidade = 100; 
+unsigned long lastTimeSensor = 0;
+unsigned long lastTimeLed = 0;
+const long intervalSensor = 1000; //INTERVALO DO SENSOR
+const long intervalLed = 100; //INTERVALO DO LED
 
 void setup() {
-  Serial.begin(9600);
-  dht.begin();
-  
-  pinMode(PINOUV, OUTPUT);
-  pinMode(PINOSENSOR, INPUT_PULLUP);
-  
+  Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT);
   Serial.println("--- Sistema de Conservação UV (DHT22) Ativo ---");
+  dht.begin(); 
 }
-
 void loop() {
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-
-  if (isnan(h) || isnan(t)) {
-    Serial.println("Erro: Falha na leitura do DHT22!");
-  } else {
-    Serial.print("Umidade: "); Serial.print(h); Serial.print("% | ");
-    Serial.print("Temp: "); Serial.print(t); Serial.println("°C");
+  unsigned long currentTime = millis();
+  if (currentTime - lastTimeLed >= intervalLed) {
+    lastTimeLed = currentTime;
+    digitalWrite(LED_PIN, !digitalRead(LED_PIN)); // Liga o LED
   }
+  if (currentTime - lastTimeSensor >= intervalSensor) {
+    lastTimeSensor = currentTime;
+    float umidade = dht.readHumidity();
+    float temperatura = dht.readTemperature();
 
-  if (digitalRead(PINOSENSOR) == LOW) {
-    digitalWrite(PINOUV, HIGH);
-    delay(velocidade);
-    digitalWrite(PINOUV, LOW);
-    delay(velocidade);
-  } else {
-    digitalWrite(PINOUV, LOW);
-    Serial.println("ALERTA: Porta Aberta! UV Desligado.");
-    delay(500); // Evita spam no Serial
+    if (isnan(umidade) || isnan(temperatura)) {
+    Serial.println("Falha ao ler o sensor!");
+    return;
+    }
+    Serial.print("Umidade: ");
+    Serial.print(umidade);
+    Serial.print("%  |  Temperatura: ");
+    Serial.print(temperatura);
+    Serial.println("°C");
   }
 }
