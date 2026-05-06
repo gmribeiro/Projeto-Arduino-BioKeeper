@@ -1,5 +1,3 @@
-## Observações
-Este projeto foi desenvolvido para um cooler contendo vegetais usando sensores ESP32 e controle de iluminação UV. O frontend é construído com React e Tailwind para uma experiência de dashboard polida.
 <div align="center">
   <h1>B I O &nbsp; K E E P E R</h1>
   <p><strong>Sistema Inteligente de Preservação de Nutrientes via IoT</strong></p>
@@ -152,3 +150,5 @@ CREATE TABLE sensor_readings (
 - `GET /api/sensors/latest` - snapshot mais recente do sensor
 - `GET /api/sensors/history` - histórico recente para gráfico
 
+## Observações
+Este projeto foi desenvolvido para um cooler contendo vegetais usando sensores ESP32 e controle de iluminação UV. O frontend é construído com React e Tailwind para uma experiência de dashboard polida.
