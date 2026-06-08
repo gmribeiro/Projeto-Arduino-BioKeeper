@@ -42,7 +42,7 @@ const unsigned long TEMPO_LIMITE_ALERTA = 15000;
 // Variáveis do Cartão SD
 bool sdConectado = false; 
 unsigned long tempoUltimaGravacaoSD = 0;
-bool primeiraGravacao = true; // Garante que a primeira gravação ocorra assim que ligar
+bool primeiraGravacao = true;
 
 // --- FUNÇÃO DO MODO ECO ---
 void piscarLedEco() {
@@ -124,11 +124,11 @@ void lerEEnviarDados() {
       logFile.print(umidade);
       logFile.print(";");
       logFile.println(estadoPortaAtual);
-      logFile.close(); // Salva fisicamente na hora contra quedas de energia!
+      logFile.close();
       
       Serial.println(">>> Dados salvos com sucesso no Cartão SD!");
-      tempoUltimaGravacaoSD = millis(); // Reseta o cronômetro de 5 minutos
-      primeiraGravacao = false;         // Desativa a flag de primeira gravação
+      tempoUltimaGravacaoSD = millis();
+      primeiraGravacao = false;         
     } else {
       Serial.println("Erro ao abrir /log_teste.csv para gravação!");
     }
@@ -190,11 +190,11 @@ void setup() {
   Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
 
   // Configura os Timers
-  timer.setInterval(2000L, lerEEnviarDados);   // Lê o sensor e atualiza Blynk a cada 2s
-  timer.setInterval(500L, verificarPorta);     // Verifica a porta a cada 0.5s
+  timer.setInterval(2000L, lerEEnviarDados);   
+  timer.setInterval(500L, verificarPorta);    
   
   timerLedId = timer.setInterval(1000L, piscarLedEco);
-  timer.disable(timerLedId);                   // O LED Eco começa desligado
+  timer.disable(timerLedId);              
 }
 
 void loop() {
