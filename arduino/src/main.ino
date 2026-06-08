@@ -12,8 +12,8 @@
 #include <SD.h>
 
 // --- CONFIGURAÇÕES DE REDE ---
-char ssid[] = "POCO";
-char pass[] = "notebook";
+char ssid[] = "Wokwi-GUEST";
+char pass[] = "";
 
 // --- CONFIGURAÇÕES DE PINOS ---
 #define DHTPIN 4
@@ -42,7 +42,7 @@ const unsigned long TEMPO_LIMITE_ALERTA = 15000;
 // Variáveis do Cartão SD
 bool sdConectado = false; 
 unsigned long tempoUltimaGravacaoSD = 0;
-bool primeiraGravacao = true;
+bool primeiraGravacao = true; // Garante que a primeira gravação ocorra assim que ligar
 
 // --- FUNÇÃO DO MODO ECO ---
 void piscarLedEco() {
@@ -69,6 +69,7 @@ void verificarPorta() {
   if (estadoBotao == HIGH) {
     // PORTA ABERTA
     estadoPortaAtual = "ABERTA";
+    Blynk.virtualWrite(V3, "ABERTA");
 
     if (portaEstavaFechada) {
       Serial.println("ALERTA: A porta do refrigerador foi aberta!");
@@ -85,6 +86,7 @@ void verificarPorta() {
   else {
     // PORTA FECHADA
     estadoPortaAtual = "FECHADA";
+    Blynk.virtualWrite(V3, "FECHADA");
     
     if (!portaEstavaFechada) {
       Serial.println("Porta fechada. Sistema normalizado.");
@@ -124,11 +126,11 @@ void lerEEnviarDados() {
       logFile.print(umidade);
       logFile.print(";");
       logFile.println(estadoPortaAtual);
-      logFile.close();
+      logFile.close(); // Salva fisicamente na hora contra quedas de energia!
       
       Serial.println(">>> Dados salvos com sucesso no Cartão SD!");
-      tempoUltimaGravacaoSD = millis();
-      primeiraGravacao = false;         
+      tempoUltimaGravacaoSD = millis(); // Reseta o cronômetro de 5 minutos
+      primeiraGravacao = false;         // Desativa a flag de primeira gravação
     } else {
       Serial.println("Erro ao abrir /log_teste.csv para gravação!");
     }
@@ -190,11 +192,11 @@ void setup() {
   Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
 
   // Configura os Timers
-  timer.setInterval(2000L, lerEEnviarDados);   
-  timer.setInterval(500L, verificarPorta);    
+  timer.setInterval(2000L, lerEEnviarDados);   // Lê o sensor e atualiza Blynk a cada 2s
+  timer.setInterval(500L, verificarPorta);     // Verifica a porta a cada 0.5s
   
   timerLedId = timer.setInterval(1000L, piscarLedEco);
-  timer.disable(timerLedId);              
+  timer.disable(timerLedId);                   // O LED Eco começa desligado
 }
 
 void loop() {
