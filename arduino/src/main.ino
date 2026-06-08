@@ -12,8 +12,8 @@
 #include <SD.h>
 
 // --- CONFIGURAÇÕES DE REDE ---
-char ssid[] = "Wokwi-GUEST";
-char pass[] = "";
+char ssid[] = "POCO";
+char pass[] = "notebook";
 
 // --- CONFIGURAÇÕES DE PINOS ---
 #define DHTPIN 4
